@@ -5,28 +5,24 @@ stylingOptions =
   fullscreen: false
   # display position 'top', 'middle', 'bottom'
   vertical: 'bottom'
-  # display position 'left, 'right'
-  horizontal: 'left'
 
 dateOptions =
   # display not only 'time' also 'date'
   showDate: false
   # format of 'date'
-  date: '%d/%m/%Y %a'
-  # format of 'time'
-  time: '%l:%M %p'
+  date: '　%m / %d / %Y'
 
 format = (->
   if dateOptions.showDate
-    dateOptions.date + '\n' +dateOptions.time
+    dateOptions.date + '\n' +'%H:%M:%S %p'
   else
-    dateOptions.time
+    '%H:%M:%S %p'
 )()
 
 command: "date +\"#{format}\""
 
 # the refresh frequency in milliseconds
-refreshFrequency: 30000
+refreshFrequency: 1000
 
 # for update function
 dateOptions: dateOptions
@@ -50,35 +46,15 @@ update: (output) ->
   $(simpleClock).html(html)
 
 style: (->
-  fontSize = '7em'
+  fontSize = '2.5em'
   width = 'auto'
   transform = 'auto'
-  bottom = '3%'
+  bottom = '47px'
   top = 'auto'
-  left = '3%'
-  right = 'auto'
-
-  if stylingOptions.fullscreen
-    fontSize = '10em'
-    width = '94%'
-
-  if stylingOptions.vertical is 'middle'
-    transform = 'translateY(50%)'
-    bottom = '50%'
-  else if stylingOptions.vertical is 'top'
-    bottom = 'auto'
-    top = '3%'
-
-  if stylingOptions.horizontal is 'right'
-    left = 'auto'
-    right = '3%'
 
   return """
-    background: #{stylingOptions.background}
     color: #FFFFFF
     font-family: Helvetica Neue
-    left: #{left}
-    right: #{right}
     top: #{top}
     bottom: #{bottom}
     transform: #{transform}
@@ -89,10 +65,9 @@ style: (->
       font-weight: 100
       margin: 0
       text-align: center
-      padding: 10px 20px
+      margin-left:20px
 
     #simpleClock .date
-      margin-left: .5em
       font-size: .5em
   """
 )()
